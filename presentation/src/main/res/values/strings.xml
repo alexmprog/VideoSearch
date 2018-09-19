@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VideoSearch</string>
+    <string name="liked">Liked</string>
+    <string name="disliked">Disliked</string>
+
+    <string name="total_liked">Total liked:%1$d</string>
+    <string name="total_disliked">Total disliked:%1$d</string>
+</resources>

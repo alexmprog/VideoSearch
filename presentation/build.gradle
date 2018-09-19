@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+
+ext {
+    supportLibraryVersion = "27.1.1"
+    constraintLayoutVersion = "1.1.2"
+    butterKnifeVersion = "8.8.1"
+    daggerVersion = "2.15"
+    conductorVersion = "2.1.4"
+    timberVersion = "4.7.0"
+    picassoVersion = "2.71828"
+    exoPlayerVersion = "2.6.1"
+    rxBindingVersion = "2.1.1"
+}
+
+android {
+
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        applicationId "com.vyng.videosearch"
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
+        testInstrumentationRunner globalConfiguration["testInstrumentationRunner"]
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation project(":domain")
+    implementation project(":data")
+
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+
+    // Dagger Core
+    compileOnly "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // Dagger Android
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // Conductor
+    implementation "com.bluelinelabs:conductor:$conductorVersion"
+
+    // Butter Knife
+    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+    // Picasso image loading
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    // Exo player
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoPlayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoPlayerVersion"
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //RxBindings
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
+
+    testImplementation 'junit:junit:4.12'
+}
